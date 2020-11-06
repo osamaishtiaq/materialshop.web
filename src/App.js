@@ -1,7 +1,14 @@
 import './App.css';
 import Home from './components/pages/home';
 import Navbar from './components/navbar/navbar';
+import SignIn from './components/pages/auth/signIn';
 import React  from 'react';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+
+} from "react-router-dom";
 
 class App extends React.Component {
  
@@ -10,7 +17,8 @@ class App extends React.Component {
 
     this.state = {
       cart: {},
-      user: {}
+      user: {},
+      isLogedIn: false
     };
   }
 
@@ -18,7 +26,16 @@ class App extends React.Component {
     return (
       <div className="App">
         <Navbar />
-        <Home />
+        <Router>
+          <Switch>
+            <Route path="/cat">
+              <Home />
+            </Route>
+            <Route path="/signin">
+              <SignIn />
+            </Route>
+          </Switch>
+        </Router>
       </div>
     );
   }
