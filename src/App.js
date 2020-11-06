@@ -2,6 +2,7 @@ import './App.css';
 import Home from './components/pages/home';
 import Navbar from './components/navbar/navbar';
 import SignIn from './components/pages/auth/signIn';
+import ProductDetail from './components/product-details/productDetail';
 import React  from 'react';
 import {
   BrowserRouter as Router,
@@ -33,6 +34,9 @@ class App extends React.Component {
             </Route>
             <Route path="/signin">
               <SignIn />
+            </Route>
+            <Route path="/productDetail">
+              <ProductDetail />
             </Route>
           </Switch>
         </Router>

@@ -5,6 +5,7 @@ import useStyles from './subCategory.style';
 import React, {useState} from 'react';
 import { GetSubCategories } from '../../services/subCategoryService';
 import { Button, CircularProgress } from "@material-ui/core";
+import {Link} from 'react-router-dom';
 
 let SubData = [];
 
@@ -38,7 +39,9 @@ function SubCategory({data}) {
                                 <img className={classes.cardImg} src={item.image} alt={item.name} />
                                 <div className={classes.cardRight}>
                                     <p className={classes.cardText}>{item.name}</p>
-                                    <Button variant="contained" color="secondary">Shop All</Button>
+                                    <Button variant="contained" color="secondary">
+                                        <Link className={classes.cardLink} to="/productDetail">Shop All</Link>
+                                    </Button>
                                 </div>
                             </div>
                         );

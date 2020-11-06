@@ -32,6 +32,10 @@ export default makeStyles((theme) => ({
     cardText: {
         fontWeight: 600,
         fontSize: '1.2em'
+    },
+    cardLink: {
+      textDecoration: 'none',
+      color: 'white'
     }
   }));
   

@@ -17,12 +17,13 @@ export default function ProductGrid({ categories }) {
         <div className={classes.root}>
             {categories.map((item, index) => {
                     if(item.subcategory === false) {
-                        return (
-                            <div key={index + item.id} className={classes.card}>
-                                <img className={classes.cardImg} src={item.image} alt={item.name} />
-                                <p className={classes.cardText}>{item.name.toLowerCase()}</p>
-                            </div>
-                        );
+                        return null;
+                        // return (
+                        //     <div key={index + item.id} className={classes.card}>
+                        //         <img className={classes.cardImg} src={item.image} alt={item.name} />
+                        //         <p className={classes.cardText}>{item.name.toLowerCase()}</p>
+                        //     </div>
+                        // );
                     }
                     else if(item.subcategory === true){
                         return (
