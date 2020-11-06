@@ -1,36 +1,55 @@
 import React from 'react';
-import GridList from '@material-ui/core/GridList';
-import GridListTile from '@material-ui/core/GridListTile';
-import GridListTileBar from '@material-ui/core/GridListTileBar';
-import ListSubheader from '@material-ui/core/ListSubheader';
-import IconButton from '@material-ui/core/IconButton';
-import InfoIcon from '@material-ui/icons/Info';
 import useStyles from './productGrid.style';
+import SubCategory from '../sub-category/subCategory';
+import { Container } from "@material-ui/core";
+import {
+    Switch,
+    Route,
+    Link,
+    useRouteMatch
+} from "react-router-dom";
 
 export default function ProductGrid({ categories }) {
+    let match = useRouteMatch();
     const classes = useStyles();
     
     return (
         <div className={classes.root}>
-            <GridList cellHeight={180} className={classes.gridList}>
-                <GridListTile key="Subheader" cols={2} style={{ height: 'auto' }}>
-                    <ListSubheader component="div">Explore Categories</ListSubheader>
-                </GridListTile>
-                {categories.map((item) => (
-                    <GridListTile key={item.id}>
-                        <img src={item.image} alt={item.name} />
-                        <GridListTileBar
-                            title={item.name}
-                            subtitle={item.subcategory ? "Explore more" : ""}
-                            actionIcon={
-                                <IconButton aria-label={`info about ${item.name}`} className={classes.icon}>
-                                    <InfoIcon />
-                                </IconButton>
-                            }
-                        />
-                    </GridListTile>
-                ))}
-            </GridList>
+            {categories.map((item, index) => {
+                    if(item.subcategory === false) {
+                        return (
+                            <div key={index + item.id} className={classes.card}>
+                                <img className={classes.cardImg} src={item.image} alt={item.name} />
+                                <p className={classes.cardText}>{item.name.toLowerCase()}</p>
+                            </div>
+                        );
+                    }
+                    else if(item.subcategory === true){
+                        return (
+                            <div key={index + item.id} className={classes.card}>
+                                <img className={classes.cardImg} src={item.image} alt={item.name} />
+                                <Link to={`${match.url}/${item.id}`}>
+                                    <p className={classes.cardText}>{item.name.toLowerCase()}</p>
+                                </Link>
+                            </div> 
+                        );
+                    }
+                    else{
+                        return (
+                            <h1>No Categories found</h1>
+                        );
+                    }
+                }
+            )}
+            <br/>
+            <Container>
+                <Switch>
+                    <Route path={`${match.path}/:catId`} >
+                        <SubCategory data={categories} />
+                    </Route>
+                </Switch>
+            </Container>
         </div>
     );
 }
+
