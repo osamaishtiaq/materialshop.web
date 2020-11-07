@@ -8,7 +8,7 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-
+  Link
 } from "react-router-dom";
 
 class App extends React.Component {
@@ -29,6 +29,11 @@ class App extends React.Component {
         <Navbar />
         <Router>
           <Switch>
+            <Route path='/' exact>
+              <div style={{marginTop: '100px'}}>
+                <Link to='/cat'>Categories</Link>
+              </div>
+            </Route>
             <Route path="/cat">
               <Home />
             </Route>
