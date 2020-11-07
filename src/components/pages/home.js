@@ -2,8 +2,7 @@ import React, { Component } from "react";
 import { GetCategories } from '../../services/categoryService';
 import ProductGrid from '../product-grid/productGrid';
 import { Container, CircularProgress } from '@material-ui/core';
-
-
+ 
 class Home extends Component {
     constructor(props) {
         super(props);
