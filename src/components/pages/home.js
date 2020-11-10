@@ -1,8 +1,9 @@
 import React, { Component } from "react";
-import { GetCategories } from '../../services/categoryService';
+import { GetAllEntries } from '../../utils/categoryService';
 import ProductGrid from '../product-grid/productGrid';
-import { Container, CircularProgress } from '@material-ui/core';
- 
+import { Container } from '@material-ui/core';
+import Loader from '../common/loader';
+
 class Home extends Component {
     constructor(props) {
         super(props);
@@ -13,28 +14,23 @@ class Home extends Component {
     }
 
     componentDidMount() {
-        GetCategories().then(newData => {
-            console.log(newData);
-
+        GetAllEntries().then(newData => {
             this.setState({ categories: newData });
         }).catch((err) => {
-            console.info("Error in componentDidMount fetch categories");
-            console.log(err);
+            console.info("Error in componentDidMount fetch categories: ", err);
         })
     }
 
     render() {
+        const catList = this.state.categories.length > 0 ?
+
+            <ProductGrid categories={this.state.categories} />
+            : <Loader />;
+
         return (
-            this.state.categories.length > 0 ? 
-            <div style={{ marginTop: "90px" }}>
-                <Container maxWidth="lg">
-                    <ProductGrid categories={this.state.categories} />
-                </Container>
-            </div>
-            
-            : <div style={{ position: "absolute", left: "50%", top: "50%", transform: "translate(-50%, -50%)" }}>
-                <CircularProgress />
-                <h3>Loading</h3>
+            <div>
+                <h2>Explore Our Products</h2>
+                {catList}
             </div>
         );
     }

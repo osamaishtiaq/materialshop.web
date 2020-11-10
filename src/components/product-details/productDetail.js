@@ -5,14 +5,19 @@ import useStyles from './productDetail.style';
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from 'react-responsive-carousel';
 import FavoriteBorderTwoToneIcon from '@material-ui/icons/FavoriteBorderTwoTone';
-import {TextField} from '@material-ui/core';
+import { TextField } from '@material-ui/core';
 import { Button } from '@material-ui/core';
+import { useRouteMatch } from "react-router-dom"
 
 export default function ProductDetail() {
-  const classes = useStyles();
+    const classes = useStyles();
+    const routeMatch = useRouteMatch();
+    
+    const productId = routeMatch.params.id;
 
-  return (
-    <div style={{marginTop: '80px'}}>
+    console.log("Product Id: ", productId);
+
+    return (
         <div className={classes.root}>
             <Paper className={classes.paper}>
                 <Grid container spacing={6}>
@@ -58,13 +63,12 @@ export default function ProductDetail() {
                                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec hendrerit massa a libero dictum, eget faucibus massa tincidunt. Integer at tempus quam. Maecenas condimentum venenatis semper. Nulla sit amet ligula dictum, pellentesque ipsum et, euismod quam. Donec eu tincidunt ante, at pulvinar sem. Sed malesuada vehicula tempus. Duis porttitor pulvinar ultrices. Donec cursus rhoncus urna, pretium tempus dolor pulvinar quis. Nulla consectetur tellus eget dui pharetra, quis consectetur arcu tristique. Curabitur volutpat suscipit arcu non faucibus. Etiam lacinia congue suscipit. Vestibulum vitae rhoncus tellus. Suspendisse in dictum turpis, a tincidunt ipsum. Duis pharetra lorem quis nulla sagittis pulvinar.</p>
                         </div>
                         <div className={classes.row}>
-                            <Button style={{width: '48%'}} size="lg" variant="contained" color="secondary">Add to Cart</Button>
-                            <Button style={{width: '48%'}} size="lg" variant="contained" color="primary">Add to Wishlist</Button>
+                            <Button style={{ width: '48%' }} variant="contained" color="secondary">Add to Cart</Button>
+                            <Button style={{ width: '48%' }} variant="contained" color="primary">Add to Wishlist</Button>
                         </div>
                     </Grid>
                 </Grid>
             </Paper>
         </div>
-    </div>
-  );
+    );
 }

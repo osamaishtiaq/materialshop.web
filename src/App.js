@@ -3,16 +3,17 @@ import Home from './components/pages/home';
 import Navbar from './components/navbar/navbar';
 import SignIn from './components/pages/auth/signIn';
 import ProductDetail from './components/product-details/productDetail';
-import React  from 'react';
+import SubCategory from './components/sub-category/subCategory';
+import React from 'react';
+import {Container } from '@material-ui/core';
 import {
-  BrowserRouter as Router,
+  HashRouter as Router,
   Switch,
-  Route,
-  Link
+  Route
 } from "react-router-dom";
 
 class App extends React.Component {
- 
+
   constructor(props) {
     super(props);
 
@@ -24,26 +25,30 @@ class App extends React.Component {
   }
 
   render() {
+
     return (
       <div className="App">
-        <Navbar />
         <Router>
-          <Switch>
-            <Route path='/' exact>
-              <div style={{marginTop: '100px'}}>
-                <Link to='/cat'>Categories</Link>
-              </div>
-            </Route>
-            <Route path="/cat">
-              <Home />
-            </Route>
-            <Route path="/signin">
-              <SignIn />
-            </Route>
-            <Route path="/productDetail">
-              <ProductDetail />
-            </Route>
-          </Switch>
+          <Navbar />
+          <div style={{ marginTop: "80px" }}></div>
+          <Container maxWidth="lg">
+
+            <Switch>
+              <Route path='/' exact>
+                <Home />
+              </Route>
+              <Route path="/signin">
+                <SignIn />
+              </Route>
+              <Route path={`/categories/:id/:name`}>
+                <SubCategory />
+              </Route>
+              <Route path={`/productdetail/:id`}>
+                <ProductDetail />
+              </Route>
+            </Switch>
+
+          </Container>
         </Router>
       </div>
     );
